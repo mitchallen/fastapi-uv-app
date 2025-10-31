@@ -1,6 +1,10 @@
 import pytest
 from httpx import AsyncClient, ASGITransport
-from main import app
+from main import app, items
+
+@pytest.fixture(autouse=True)
+def clear_items():
+    items.clear()
 
 @pytest.mark.asyncio
 async def test_read_root():
@@ -32,3 +36,20 @@ async def test_create_and_read_items():
         items = response.json()
         assert len(items) > 0
         assert item_data in items
+
+@pytest.mark.asyncio
+async def test_read_item():
+    async with AsyncClient(transport=ASGITransport(app), base_url="http://testserver") as client:
+        # First, create an item
+        item_data = {"name": "Individual Item", "price": 30.0}
+        response = await client.post("/items/", json=item_data)
+        assert response.status_code == 200
+
+        # Get the item by id (assuming it's the first, id 0)
+        response = await client.get("/items/0")
+        assert response.status_code == 200
+        assert response.json() == item_data
+
+        # Test not found
+        response = await client.get("/items/999")
+        assert response.status_code == 404
