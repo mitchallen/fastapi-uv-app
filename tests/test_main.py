@@ -57,3 +57,4 @@ async def test_read_item():
         # Test not found
         response = await client.get("/items/999")
         assert response.status_code == 404
+
