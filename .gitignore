@@ -12,5 +12,4 @@ pip-delete-this-directory.txt
 htmlcov/
 .pytest_cache/
 .venv
-uv.lock
 .DS_Store
