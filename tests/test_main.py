@@ -11,7 +11,11 @@ async def test_read_root():
     async with AsyncClient(transport=ASGITransport(app), base_url="http://testserver") as client:
         response = await client.get("/")
         assert response.status_code == 200
-        assert response.json() == {"Hello": "World"}
+        data = response.json()
+        assert data["name"] == "FastAPI App"
+        assert data["version"] == "0.1.0"
+        assert "uptime" in data
+        assert data["status"] == "OK"
 
 @pytest.mark.asyncio
 async def test_create_item():

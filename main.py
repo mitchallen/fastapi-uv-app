@@ -1,7 +1,10 @@
+import time
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 app = FastAPI()
+
+start_time = time.time()
 
 class Item(BaseModel):
     name: str
@@ -11,7 +14,13 @@ items = []
 
 @app.get("/")
 async def read_root():
-    return {"Hello": "World"}
+    uptime = time.time() - start_time
+    return {
+        "name": "FastAPI App",
+        "version": "0.1.0",
+        "uptime": f"{uptime:.2f} seconds",
+        "status": "OK"
+    }
 
 @app.get("/items/")
 async def read_items():
