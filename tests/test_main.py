@@ -58,3 +58,37 @@ async def test_read_item():
         response = await client.get("/items/999")
         assert response.status_code == 404
 
+@pytest.mark.asyncio
+async def test_create_item_rejects_extra_fields():
+    async with AsyncClient(transport=ASGITransport(app), base_url="http://testserver") as client:
+        # Try to create item with extra fields
+        item_data = {"name": "Test Item", "price": 10.5, "extra_field": "should be rejected"}
+        response = await client.post("/items/", json=item_data)
+        assert response.status_code == 422  # Unprocessable Entity
+
+@pytest.mark.asyncio
+async def test_create_item_validates_name():
+    async with AsyncClient(transport=ASGITransport(app), base_url="http://testserver") as client:
+        # Test empty name
+        item_data = {"name": "", "price": 10.5}
+        response = await client.post("/items/", json=item_data)
+        assert response.status_code == 422
+
+        # Test whitespace-only name
+        item_data = {"name": "   ", "price": 10.5}
+        response = await client.post("/items/", json=item_data)
+        assert response.status_code == 422
+
+@pytest.mark.asyncio
+async def test_create_item_validates_price():
+    async with AsyncClient(transport=ASGITransport(app), base_url="http://testserver") as client:
+        # Test zero price
+        item_data = {"name": "Test Item", "price": 0}
+        response = await client.post("/items/", json=item_data)
+        assert response.status_code == 422
+
+        # Test negative price
+        item_data = {"name": "Test Item", "price": -5.0}
+        response = await client.post("/items/", json=item_data)
+        assert response.status_code == 422
+

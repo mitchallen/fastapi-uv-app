@@ -13,7 +13,8 @@
 - **Naming**: snake_case for functions/variables, PascalCase for classes
 - **Types**: Use type hints for all function parameters and return values
 - **Async**: Use async/await for all API endpoints
-- **Models**: Use Pydantic BaseModel for data validation
+- **Models**: Use Pydantic BaseModel for data validation with `model_config = {"extra": "forbid"}`
+- **Validation**: Use Pydantic field validators for business logic validation
 - **Docstrings**: Required for all functions, classes, and modules
 - **Error handling**: Use FastAPI's HTTPException for API errors
 - **Rate limiting**: Implemented with slowapi middleware (10 requests/minute per IP)

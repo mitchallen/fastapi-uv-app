@@ -5,7 +5,7 @@ FastAPI application with item management endpoints.
 import os
 import time
 from fastapi import FastAPI, HTTPException, Request
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
@@ -21,8 +21,24 @@ start_time = time.time()
 
 class Item(BaseModel):
     """Model for an item with name and price."""
+    model_config = {"extra": "forbid"}
+
     name: str
     price: float
+
+    @field_validator("name")
+    @classmethod
+    def name_must_not_be_empty(cls, v: str) -> str:
+        if not v.strip():
+            raise ValueError("name must not be empty")
+        return v.strip()
+
+    @field_validator("price")
+    @classmethod
+    def price_must_be_positive(cls, v: float) -> float:
+        if v <= 0:
+            raise ValueError("price must be positive")
+        return v
 
 items = []
 
