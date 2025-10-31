@@ -5,10 +5,12 @@ A simple FastAPI application demonstrating async endpoints, Pydantic models, tes
 ## Features
 
 - **FastAPI**: Modern web framework for building APIs with async support
-- **Pydantic**: Data validation and serialization
+- **Pydantic**: Data validation and serialization with strict input validation
 - **pytest**: Testing framework with async support
 - **pytest-cov**: Code coverage reporting
 - **uv**: Fast Python package installer and resolver
+- **Security**: Rate limiting, input validation, and vulnerability scanning
+- **SlowAPI**: Rate limiting middleware for API protection
 
 ## Installation
 
@@ -80,6 +82,34 @@ Open coverage report in browser:
 ```bash
 make coverage-open
 ```
+
+## Security
+
+### Vulnerability Scanning
+
+The project includes automated security scanning to identify potential vulnerabilities in dependencies and source code.
+
+Run all security scans:
+```bash
+make security
+```
+
+Check dependencies for known vulnerabilities:
+```bash
+make safety
+```
+
+Run security linting on source code:
+```bash
+make bandit
+```
+
+### Security Features
+
+- **Rate Limiting**: 10 requests per minute per IP address using SlowAPI
+- **Input Validation**: Pydantic models with strict validation and field sanitization
+- **Dependency Scanning**: Automated checks for known security vulnerabilities in Python packages
+- **Code Security Linting**: Static analysis for potential security issues in source code
 
 ## Project Structure
 
