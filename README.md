@@ -12,6 +12,8 @@ A simple FastAPI application demonstrating async endpoints, Pydantic models, tes
 
 ## Installation
 
+### Local Development
+
 1. Install uv (if not already installed):
    ```bash
    curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -27,6 +29,14 @@ A simple FastAPI application demonstrating async endpoints, Pydantic models, tes
    ```bash
    make install
    ```
+
+### Docker
+
+Build and run with Docker:
+```bash
+docker build -t fastapi-app .
+docker run -p 8000:8000 fastapi-app
+```
 
 ## Usage
 
