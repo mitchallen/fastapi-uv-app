@@ -6,7 +6,7 @@
 - **Run all tests**: `PYTHONPATH=. uv run pytest --cov=main --cov-report=term-missing` or `make test`
 - **Run single test**: `PYTHONPATH=. uv run pytest tests/test_main.py::test_function_name -v`
 - **Generate coverage**: `PYTHONPATH=. uv run pytest --cov=main --cov-report=html` or `make coverage`
-- **Run security scans**: `make security` (includes safety and bandit)
+- **Run security scans**: `make security` (includes pip-audit and bandit)
 - **Check dependencies for vulnerabilities**: `make safety`
 - **Run security linting**: `make bandit`
 

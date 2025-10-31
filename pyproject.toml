@@ -13,6 +13,6 @@ dependencies = [
     "pytest-cov",
     "pdoc",
     "slowapi",
-    "safety",
+    "pip-audit",
     "bandit",
 ]

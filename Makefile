@@ -28,7 +28,7 @@ docs-open: docs  ## Open HTML documentation in browser
 security: safety bandit  ## Run all security scans
 
 safety:  ## Check for known security vulnerabilities in dependencies
-	uv run safety check
+	uv run pip-audit
 
 bandit:  ## Run security linting on Python code
 	uv run bandit -r main.py --exclude tests/
