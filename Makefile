@@ -1,4 +1,4 @@
-.PHONY: help install run test
+.PHONY: help install run test coverage
 
 help:  ## Show this help message
 	@echo "Available targets:"
@@ -12,3 +12,6 @@ run:  ## Run the FastAPI app
 
 test:  ## Run tests
 	PYTHONPATH=. uv run pytest --cov=main --cov-report=term-missing
+
+coverage:  ## Generate HTML coverage report
+	PYTHONPATH=. uv run pytest --cov=main --cov-report=html
