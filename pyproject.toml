@@ -13,4 +13,6 @@ dependencies = [
     "pytest-cov",
     "pdoc",
     "slowapi",
+    "safety",
+    "bandit",
 ]

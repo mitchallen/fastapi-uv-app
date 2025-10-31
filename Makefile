@@ -1,4 +1,4 @@
-.PHONY: help install run test coverage coverage-open docs docs-open
+.PHONY: help install run test coverage coverage-open docs docs-open security safety bandit
 
 help:  ## Show this help message
 	@echo "Available targets:"
@@ -24,3 +24,11 @@ docs:  ## Generate HTML documentation
 
 docs-open: docs  ## Open HTML documentation in browser
 	open docs/index.html
+
+security: safety bandit  ## Run all security scans
+
+safety:  ## Check for known security vulnerabilities in dependencies
+	uv run safety check
+
+bandit:  ## Run security linting on Python code
+	uv run bandit -r main.py --exclude tests/
