@@ -1,4 +1,4 @@
-.PHONY: help install run test coverage coverage-open
+.PHONY: help install run test coverage coverage-open docs
 
 help:  ## Show this help message
 	@echo "Available targets:"
@@ -18,3 +18,6 @@ coverage:  ## Generate HTML coverage report
 
 coverage-open: coverage  ## Open HTML coverage report in browser
 	open htmlcov/index.html
+
+docs:  ## Generate HTML documentation
+	uv run pdoc main.py -o docs

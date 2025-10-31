@@ -11,4 +11,5 @@ dependencies = [
     "pytest-asyncio",
     "httpx",
     "pytest-cov",
+    "pdoc",
 ]
