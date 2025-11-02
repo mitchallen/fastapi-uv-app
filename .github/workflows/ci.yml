@@ -1,0 +1,33 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    - name: Install uv
+      run: curl -LsSf https://astral.sh/uv/install.sh | sh
+    - name: Install dependencies
+      run: uv sync
+    - name: Run tests
+      run: PYTHONPATH=. uv run pytest --cov=main --cov-report=term-missing
+    - name: Run security scans
+      run: make security
+
+  docker:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build Docker image
+      run: docker build -t fastapi-app .
