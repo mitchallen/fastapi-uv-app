@@ -53,7 +53,8 @@ The API will be available at `http://localhost:8000`
 
 ### API Endpoints
 
-- `GET /` - Returns a hello world message
+- `GET /` - Returns application information including a link to API documentation
+- `GET /docs` - Interactive API documentation (Swagger UI)
 - `POST /items/` - Creates a new item
 
 Example POST request:
@@ -123,6 +124,10 @@ make bandit
 ├── .gitignore           # Git ignore rules
 └── README.md            # This file
 ```
+
+## About
+
+This project was originally created using [opencode](https://opencode.ai) v1.0.11 and the Grok LLM.
 
 ## Development
 
