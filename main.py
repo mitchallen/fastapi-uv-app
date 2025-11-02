@@ -50,7 +50,8 @@ async def read_root():
         "name": "FastAPI App",
         "version": "0.1.0",
         "uptime": f"{uptime:.2f} seconds",
-        "status": "OK"
+        "status": "OK",
+        "docs_url": "/docs"
     }
 
 @app.get("/items/")
