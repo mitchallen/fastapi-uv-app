@@ -403,32 +403,40 @@ name = "fastapi-app"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
-    { name = "bandit" },
     { name = "fastapi" },
-    { name = "httpx" },
-    { name = "pdoc" },
-    { name = "pip-audit" },
     { name = "pydantic" },
-    { name = "pytest" },
-    { name = "pytest-asyncio" },
-    { name = "pytest-cov" },
     { name = "slowapi" },
     { name = "uvicorn", extra = ["standard"] },
 ]
 
-[package.metadata]
-requires-dist = [
+[package.dev-dependencies]
+dev = [
     { name = "bandit" },
-    { name = "fastapi" },
     { name = "httpx" },
     { name = "pdoc" },
     { name = "pip-audit" },
-    { name = "pydantic" },
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "pytest-cov" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "fastapi" },
+    { name = "pydantic" },
     { name = "slowapi" },
     { name = "uvicorn", extras = ["standard"] },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "bandit" },
+    { name = "httpx" },
+    { name = "pdoc" },
+    { name = "pip-audit" },
+    { name = "pytest" },
+    { name = "pytest-asyncio" },
+    { name = "pytest-cov" },
 ]
 
 [[package]]

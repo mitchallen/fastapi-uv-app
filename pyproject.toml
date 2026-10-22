@@ -7,12 +7,19 @@ dependencies = [
     "fastapi",
     "uvicorn[standard]",
     "pydantic",
+    "slowapi",
+]
+
+# Test, docs and scan tooling. `uv sync` installs it by default; the
+# Dockerfile's `--no-dev` keeps it out of the image (pip-audit alone pulls
+# pip, which vendors packages Trivy flags).
+[dependency-groups]
+dev = [
     "pytest",
     "pytest-asyncio",
     "httpx",
     "pytest-cov",
     "pdoc",
-    "slowapi",
     "pip-audit",
     "bandit",
 ]
