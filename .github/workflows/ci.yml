@@ -10,9 +10,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v7
       with:
         python-version: '3.12'
     - name: Install uv
@@ -31,7 +31,7 @@ jobs:
       contents: read
       packages: write
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: Log in to GitHub Container Registry
       run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
     - name: Build and push Docker image
