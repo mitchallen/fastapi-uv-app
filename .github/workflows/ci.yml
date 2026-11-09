@@ -32,9 +32,12 @@ jobs:
       packages: write
     steps:
     - uses: actions/checkout@v7
+    # PRs build the image as a check; only a push to main publishes :latest.
     - name: Log in to GitHub Container Registry
+      if: github.event_name == 'push'
       run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-    - name: Build and push Docker image
-      run: |
-        docker build -t ghcr.io/${{ github.repository }}/fastapi-app:latest .
-        docker push ghcr.io/${{ github.repository }}/fastapi-app:latest
+    - name: Build Docker image
+      run: docker build -t ghcr.io/${{ github.repository }}/fastapi-app:latest .
+    - name: Push Docker image
+      if: github.event_name == 'push'
+      run: docker push ghcr.io/${{ github.repository }}/fastapi-app:latest
