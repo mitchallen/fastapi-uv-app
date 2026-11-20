@@ -23,3 +23,6 @@ dev = [
     "pip-audit",
     "bandit",
 ]
+
+[tool.uv]
+exclude-newer = "3 days"  # release-age gate: skip versions younger than 3 days
